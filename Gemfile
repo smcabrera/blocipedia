@@ -20,4 +20,8 @@ group :development do
   gem 'spring', '~> 1.2.0'
 end
 
+group :test do
+  gem 'capybara', '~> 2.2.0'
+end
+
 
