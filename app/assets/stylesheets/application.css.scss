@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+// bootstrap-sprokects needs to be imported before anything else
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+

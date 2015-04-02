@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.7'
-
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
-gem 'bootstrap_form'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'devise', '3.4.1'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'rails', '4.1.7'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'sqlite3'
@@ -26,4 +25,3 @@ group :development do
 end
 
 
-gem 'devise', '3.4.1'
