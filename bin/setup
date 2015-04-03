@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Set up Rails app. Run this script immediately after cloning the codebase.
+# # I stole this idea from thoughtbot, see their article about it here:
+# # https://robots.thoughtbot.com/bin-setup
+#
+# # Set up Ruby dependencies
+bundle install
+
+# Set up staging and production git remotes
+# git remote add staging git@heroku.com:app-staging.git
+# git remote add production git@heroku.com:app-production.git
+
+# Set up database
+bundle exec rake db:setup
