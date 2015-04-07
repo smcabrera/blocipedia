@@ -21,6 +21,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'jazz_fingers', group: :test
   gem 'rspec-rails', group: :test
-  gem 'spring', '~> 1.2.0'
+  gem 'spring', '1.3.3'
+  gem 'spring-commands-rspec', '~> 1.0.0', group: :test
 end
 
