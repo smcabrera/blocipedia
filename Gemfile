@@ -19,7 +19,7 @@ group :development do
   gem 'capybara', '~> 2.2.0', group: :test
   gem 'gemrat', '~> 0.4.6'
   gem 'guard-rspec', require: false
-  gem 'jazz_fingers'
+  gem 'jazz_fingers', group: :test
   gem 'rspec-rails', '~> 3.0', group: :test
   gem 'spring', '~> 1.2.0'
 end
