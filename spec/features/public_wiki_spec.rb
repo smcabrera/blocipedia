@@ -10,30 +10,59 @@ describe "Public wikis" do
   before do
     # We need a logged in user for all of these
     # TODO: user could be extracted into a factory at some point to streamline these tests
-    @user = User.create(:email => 'test@email.com', :password => 'password')
+    @user = User.new(:email => 'test@email.com', :password => 'password')
+    @user.skip_confirmation!
+    @user.save
     login_as(@user, :scope => :user)
   end
 
-  xit 'User who is not logged in cannot create wikis' do
+  it 'User who is not logged in cannot create wikis' do
+    visit root_path
+    click_link "Sign out"
 
+    expect(page).to_not have_link('Create wiki')
   end
 
   it 'standard (free) user can create a public wiki' do
 
     visit root_path
     click_link "Create wiki"
-    fill_in 'title', with: 'Wiki title'
-    fill_in 'body', with: 'Wiki body'
 
-    expect(Wiki.count.all).to eq(1)
+    fill_in 'wiki[title]', with: 'Wiki title'
+    fill_in 'wiki[body]', with: 'Wiki body'
+
+    click_button "Save"
+
+    expect(Wiki.all.count).to eq(1)
   end
 
-  xit 'Standard (free) user can view a public wiki' do
+  it 'Standard (free) user can view a public wiki' do
+    Wiki.create(title: 'Public Wiki', body: "Wiki body")
+    visit root_path
+
+    click_link 'Public Wiki'
+
+    expect(page).to have_content('Wiki body')
   end
 
-  xit 'Standard (free) user can edit a public wiki' do
+  it 'Standard (free) user can edit a public wiki' do
+    Wiki.create(title: 'Public Wiki', body: "Wiki body")
+
+    visit root_path
+    click_link 'edit'
+    fill_in "wiki[title]", with: 'Updated title'
+    click_button "Save"
+    visit root_path
+
+    expect(page).to have_content('Updated title')
   end
 
-  xit 'Standard (free) user can create a public wiki' do
+  it 'Standard (free) user can delete a public wiki' do
+    Wiki.create(title: 'Public Wiki', body: "Wiki body")
+
+    visit root_path
+    click_link 'delete'
+
+    expect(Wiki.all.count).to be(0)
   end
 end
