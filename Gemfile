@@ -16,11 +16,11 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capybara', '~> 2.2.0', group: :test
+  gem 'capybara', :git => 'https://github.com/jnicklas/capybara.git', group: :test
   gem 'gemrat', '~> 0.4.6'
   gem 'guard-rspec', require: false
   gem 'jazz_fingers', group: :test
-  gem 'rspec-rails', '~> 3.0', group: :test
+  gem 'rspec-rails', group: :test
   gem 'spring', '~> 1.2.0'
 end
 
