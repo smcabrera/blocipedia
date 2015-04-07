@@ -27,13 +27,6 @@ feature 'New user signs up' do
     user = User.find_by_email("test@example.com")
 
     expect(user.confirmed_at).to be(nil)
-
-    # I need to change this because we still need to confirm this guy
-    # Let's just confirm him programmatically
-    # Should we verify that that email got sent?
-    # How to do that?
-    # TODO: I think we'd just want to stub out devise--since devise itself has tests we can safely assume that if we call the right devise method the right things will happen. So we just need to stub that method so that we assume that it does what we want it to.
-
     expect(User.all.count).to eq(1)
   end
 end
