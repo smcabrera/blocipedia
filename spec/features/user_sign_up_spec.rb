@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 # As a user, I want to be able to sign up for a new account
 require 'spec_helper'
 require 'rails_helper'
 require 'spec_helper'
-require 'pry'
 
 feature 'New user signs up' do
   scenario 'with invalid username and password' do
@@ -20,11 +18,21 @@ feature 'New user signs up' do
     visit root_path
     click_link "Sign up"
 
-    fill_in 'user_email', with: 'userA@example.com'
+    fill_in 'user_email', with: "test@example.com"
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
 
     click_button 'Sign up'
+
+    user = User.find_by_email("test@example.com")
+
+    expect(user.confirmed_at).to be(nil)
+
+    # I need to change this because we still need to confirm this guy
+    # Let's just confirm him programmatically
+    # Should we verify that that email got sent?
+    # How to do that?
+    # TODO: I think we'd just want to stub out devise--since devise itself has tests we can safely assume that if we call the right devise method the right things will happen. So we just need to stub that method so that we assume that it does what we want it to.
 
     expect(User.all.count).to eq(1)
   end
@@ -32,45 +40,56 @@ end
 
 feature 'User sign in' do
   scenario 'user supplies valid credentials' do
-    User.create(
-    :email => 'username@example.com',
+    user = User.new(
+    :email => 'test@example.com',
     :password => 'password'
     )
+    user.skip_confirmation!
+    user.save
 
     visit root_path
     click_link "Sign in"
-    fill_in 'user_email', with: 'username@example.com'
+    fill_in 'user_email', with: 'test@example.com'
     fill_in 'user_password', with: 'password'
     click_button 'Log in'
 
-    expect(page).to have_content('Sign out')
+    expect(page).to have_content('Signed in successfully')
   end
 
   scenario 'user supplies invalid credentials' do
+    user = User.new(
+    :email => 'username@example.com',
+    :password => 'password'
+    )
+    user.skip_confirmation!
+    user.save
+
     visit root_path
     click_link "Sign in"
     fill_in 'user_email', with: 'invalid@bogus.com'
     fill_in 'user_password', with: 'WrongPassword'
     click_button 'Log in'
 
-    expect(page).to have_content("Log in")
+    expect(page).to have_content("Invalid email or password.")
   end
 end
 
 feature 'User sign out' do
   scenario 'user signs in and then signs out' do
-    User.create(
-      :email => 'userC@example.com',
+    user = User.new(
+      :email => 'test@example.com',
       :password => 'password'
     )
+    user.skip_confirmation!
+    user.save
 
     visit root_path
     click_link "Sign in"
-    fill_in 'user_email', with: 'userC@example.com'
+    fill_in 'user_email', with: 'test@example.com'
     fill_in 'user_password', with: 'password'
     click_button 'Log in'
     click_link "Sign out"
 
-    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Signed out successfully.')
   end
 end
