@@ -24,3 +24,5 @@ group :development do
   gem 'spring', '~> 1.2.0'
 end
 
+
+gem 'quiet_assets', '1.1.0'
