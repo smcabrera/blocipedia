@@ -1,10 +1,13 @@
 #!/bin/sh
 
 # Set up Rails app. Run this script immediately after cloning the codebase.
-# # I stole this idea from thoughtbot, see their article about it here:
-# # https://robots.thoughtbot.com/bin-setup
 #
 # # Set up Ruby dependencies
+
+echo "This script sets up the dependencies and the database for the project"
+echo "I stole this (excellent) idea from thoughtbot, see their article about it here:"
+echo "https://robots.thoughtbot.com/bin-setup"
+
 bundle install
 
 # Set up staging and production git remotes
