@@ -25,3 +25,5 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0.0', group: :test
 end
 
+
+gem 'haml-rails', '0.9.0'

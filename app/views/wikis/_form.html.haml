@@ -1,0 +1,15 @@
+= form_for wiki do |f|
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control", placeholder: "Wiki title"
+
+  .from-group
+    = f.label :body
+    = f.text_area :body, class: "form-control", placeholder: "Wiki body"
+
+  %br
+
+  .form-group
+    = f.submit "Save", class: 'btn btn-success'
+
