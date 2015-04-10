@@ -35,8 +35,6 @@
                   %a{:href => "#"} Action
                 %li
                   %a{:href => "#"} Another action
-                %li
-                  %a{:href => "#"} Something else here
                 %li.divider
                 %li
                   %a{:href => "#"} Separated link
@@ -49,9 +47,8 @@
             %button.btn.btn-default{:type => "submit"} Submit
           %ul.nav.navbar-nav.navbar-right
             %li
-              -#= link_to "Hello #{current_user.name || current_user.email}"
               - if current_user
-                = link_to "Hello #{current_user.email}"
+                = link_to "Hello #{current_user.name || current_user.email}"
             %li.dropdown
               %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 Account
@@ -62,11 +59,6 @@
                   = link_to "Sign out", destroy_user_session_path, method: :delete
                 - else
                   %li= link_to "Sign in", new_user_session_path
-                %li
-                  %a{:href => "#"} Something else here
-                %li.divider
-                %li
-                  %a{:href => "#"} Separated link
         / /.navbar-collapse
       / /.container-fluid
     - #TODO: It seems like we could write a helper method here--that's an awful lot of logic for the view layer

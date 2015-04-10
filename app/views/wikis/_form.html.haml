@@ -10,6 +10,11 @@
 
   %br
 
+  - if
+    .form-group
+      = f.check_box :private, checked_value: "true", unchecked_value: "false"
+      = f.label :private
+
   .form-group
     = f.submit "Save", class: 'btn btn-success'
 
