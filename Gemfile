@@ -32,5 +32,7 @@ group :development do
 end
 
 
-gem 'pry-rescue', '1.4.1'
-gem 'plymouth', '0.3.3'
+#gem 'pry-rescue', '1.4.1'
+#gem 'plymouth', '0.3.3'
+
+gem 'database_cleaner', '1.4.1'

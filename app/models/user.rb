@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.role = "free"
+    self.role ||= "free"
   end
 end

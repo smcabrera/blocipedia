@@ -2,8 +2,8 @@ class WikiPolicy < ApplicationPolicy
   def index?
   end
 
-  def delete?
-    user.id == record.user_id
+  def destroy?
+    user.id == record.user.id
   end
 
 end

@@ -1,12 +1,21 @@
 require 'rails_helper'
 require 'spec_helper'
+#require 'prymouth'
+require 'pry'
 
-describe "Standard (free) User role" do
+describe "Standard (free) User" do
 
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  context "when logged in as standard user" do
+  context "when not logged in" do
+    it 'cannot create wikis' do
+      visit root_path
+      expect(page).to_not have_link('Create wiki')
+    end
+  end
+
+  context "when logged in" do
 
     before do
       @user = create(:user)
@@ -14,11 +23,53 @@ describe "Standard (free) User role" do
       login_as(@user, :scope => :user)
     end
 
-    it "is able to edit public wikis created by another user" do
-      public_wiki = create(:public_wiki, user_id: @other_user.id)
+    it 'can create a public wiki' do
+
+      visit root_path
+      click_link "Create wiki"
+      fill_in 'wiki[title]', with: 'Wiki title'
+      fill_in 'wiki[body]', with: 'Wiki body'
+      click_button "Save"
+
+      expect(Wiki.all.count).to eq(1)
+    end
+
+    it 'can view a public wiki' do
+      Wiki.create(title: 'Public Wiki', body: "Wiki body", user_id: @user.id)
+
+      visit root_path
+      click_link 'Public Wiki'
+
+      expect(page).to have_content('Wiki body')
+    end
+
+    it 'can edit a public wiki they have published' do
+      create(:public_wiki, :user_id => @user.id)
+
+      visit root_path
+      click_link 'edit'
+      fill_in "wiki[title]", with: 'Updated title'
+      click_button "Save"
+      visit root_path
+
+      expect(page).to have_content('Updated title')
+    end
+
+    it 'can delete their own public wiki' do
+      create(:public_wiki, :user_id => @user.id)
+
+      visit root_path
+      click_link 'delete'
+
+      expect(Wiki.all.count).to be(0)
+    end
+
+    it "can edit public wikis created by another user" do
+      create(:public_wiki, user_id: @other_user.id)
 
       visit root_path
       click_link "edit"
+      # TODO: We can create a page object and combine filling in all the fields to a single step
       fill_in "wiki[title]", with: "Edited Title"
       fill_in "wiki[body]", with: "Edited body"
       click_button "Save"
@@ -26,17 +77,31 @@ describe "Standard (free) User role" do
       expect(page).to have_content("Edited Title")
     end
 
-    # TODO: I'm not sure how to test this since the result of using pundit is that this will error
-    # It's doing the *right* thing but the error makes the test fail rather than succeeding
-    # I'm going to move on (because it works) but this is something I'd like to resolve.
-    xit 'cannot delete wikis created by another user' do
-      @user = create(:user)
-      login_as(@user, :scope => :user)
+    it 'cannot delete wikis created by another user' do
+    # I changed this to just test if the button is there
+    # it actually doesn't make sense for a button to be visible to a user if they can't use it
+      # I'll need to clean the test database first for this to work
+
+      # Clean the test database
       public_wiki = create(:public_wiki, user_id: @other_user.id)
       visit root_path
-      click_link "delete"
 
-      expect(page).to have_content("Wiki title")
+      expect(page).to_not have_content("delete")
+    end
+
+    it 'cannot view private wikis' do
+      private_wiki = create(:private_wiki)
+      visit root_path
+
+      expect(page).to_not have_content("Private")
+    end
+
+    it 'cannot create private wikis' do
+      private_wiki = create(:private_wiki)
+      visit root_path
+      click_link "Create wiki"
+
+      expect(page).to_not have_content("private")
     end
 
   end

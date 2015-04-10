@@ -1,8 +1,12 @@
 
+User.all.each { |user| user.delete }
+Wiki.all.each { |wiki| wiki.delete }
+
+#Create users
 free_user = User.new(
-  :email => "free@example.com",
+  :email    => "free@example.com",
   :password => "password",
-  :role => "free"
+  :role     => "free"
 )
 free_user.skip_confirmation!
 free_user.save
@@ -24,9 +28,10 @@ admin_user.skip_confirmation!
 admin_user.save
 
 users = [free_user, premium_user, admin_user]
+
 users.each do |user|
   Wiki.create(
-    title: "Public Wiki by #{user.email}",
+    title: "Public Wiki",
     body: "Body text",
     private: false,
     user_id: user.id
@@ -35,10 +40,16 @@ end
 
 users.each do |user|
   Wiki.create(
-    title: "Private Wiki by #{user.email}",
+    title: "Private Wiki",
     body: "Body text",
     private: true,
     user_id: user.id
   )
 end
+
+puts "Seed finished"
+puts "#{User.all.count} users created"
+puts "#{Wiki.all.count} wikis created"
+
+
 
