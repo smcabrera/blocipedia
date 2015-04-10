@@ -6,7 +6,7 @@
       - if current_user && wiki.user.email == current_user.email
         = "by you"
       -else
-        = "by #{wiki.user.email}"
+        = "by #{wiki.user.name || wiki.user.email}"
       = link_to 'edit', edit_wiki_path(wiki)
       -#- binding.pry
       -if current_user && policy(wiki).destroy?

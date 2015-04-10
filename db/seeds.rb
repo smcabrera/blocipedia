@@ -1,9 +1,11 @@
+require 'faker'
 
 User.all.each { |user| user.delete }
 Wiki.all.each { |wiki| wiki.delete }
 
 #Create users
 free_user = User.new(
+  :name  => Faker::Name.name,
   :email    => "free@example.com",
   :password => "password",
   :role     => "free"
@@ -12,6 +14,7 @@ free_user.skip_confirmation!
 free_user.save
 
 premium_user = User.new(
+  :name  => Faker::Name.name,
   :email => "premium@example.com",
   :password => "password",
   :role => "premium"
@@ -20,6 +23,7 @@ premium_user.skip_confirmation!
 premium_user.save
 
 admin_user = User.new(
+  :name  => Faker::Name.name,
   :email => "admin@example.com",
   :password => "password",
   :role => "admin"
