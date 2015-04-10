@@ -26,7 +26,7 @@ admin_user.save
 users = [free_user, premium_user, admin_user]
 users.each do |user|
   Wiki.create(
-    title: "Public Post by #{user.email}",
+    title: "Public Wiki by #{user.email}",
     body: "Body text",
     private: false,
     user_id: user.id
@@ -35,7 +35,7 @@ end
 
 users.each do |user|
   Wiki.create(
-    title: "Private Post by #{user.email}",
+    title: "Private Wiki by #{user.email}",
     body: "Body text",
     private: true,
     user_id: user.id
