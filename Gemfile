@@ -36,3 +36,4 @@ end
 #gem 'plymouth', '0.3.3'
 
 gem 'database_cleaner', '1.4.1'
+gem 'faker', '~> 1.4.3'
