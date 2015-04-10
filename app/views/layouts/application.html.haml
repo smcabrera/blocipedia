@@ -50,7 +50,8 @@
           %ul.nav.navbar-nav.navbar-right
             %li
               -#= link_to "Hello #{current_user.name || current_user.email}"
-              = link_to "Hello #{current_user.email}"
+              - if current_user
+                = link_to "Hello #{current_user.email}"
             %li.dropdown
               %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 Account
