@@ -49,7 +49,8 @@
             %button.btn.btn-default{:type => "submit"} Submit
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{:href => "#"} Link
+              -#= link_to "Hello #{current_user.name || current_user.email}"
+              = link_to "Hello #{current_user.email}"
             %li.dropdown
               %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 Account
