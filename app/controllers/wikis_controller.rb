@@ -17,7 +17,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(wiki_params)
 
     if @wiki.save
-      redirect_to @wiki, notice: "wiki was saved successfully."
+      redirect_to wikis_path, notice: "wiki was saved successfully."
     else
       flash[:error] = "Error creating wiki. Please try again."
       render :new
