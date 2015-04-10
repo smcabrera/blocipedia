@@ -6,9 +6,12 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise', '3.4.1'
+gem 'factory_girl', '4.5.0'
+gem 'factory_girl_rails', '4.5.0'
 gem 'haml-rails', '0.9.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'pundit', '0.3.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'sqlite3'
@@ -27,7 +30,4 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0.0', group: :test
 end
 
-gem 'factory_girl', '4.5.0'
-gem 'factory_girl_rails', '4.5.0'
-gem 'pundit', '0.3.0'
 
