@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'welcome#index'
+   root 'wikis#index'
    get '/welcome' => 'welcome#index'
 
   # Example of regular route:
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :wikis
 
   # Example resource route with options:
   #   resources :products do
