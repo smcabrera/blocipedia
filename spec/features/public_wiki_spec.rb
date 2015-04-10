@@ -10,9 +10,10 @@ describe "Public wikis" do
   before do
     # We need a logged in user for all of these
     # TODO: user could be extracted into a factory at some point to streamline these tests
-    @user = User.new(:email => 'test@email.com', :password => 'password')
-    @user.skip_confirmation!
-    @user.save
+    #@user = User.new(:email => 'test@email.com', :password => 'password')
+    #@user.skip_confirmation!
+    #@user.save
+    @user = create(:user)
     login_as(@user, :scope => :user)
   end
 
