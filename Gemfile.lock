@@ -127,6 +127,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
+    interception (0.5)
     jazz_fingers (1.0.0)
       awesome_print (~> 1.6.1)
       hirb (~> 0.7)
@@ -164,6 +165,8 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    plymouth (0.3.3)
+      pry-exception_explorer (~> 0.1.7)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -176,6 +179,8 @@ GEM
     pry-doc (0.6.0)
       pry (~> 0.9)
       yard (~> 0.8)
+    pry-exception_explorer (0.1.9)
+      pry-stack_explorer (>= 0.3.9)
     pry-git (0.2.3)
       diffy
       grit
@@ -185,6 +190,12 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
+    pry-rescue (1.4.1)
+      interception (>= 0.5)
+      pry
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
@@ -301,6 +312,8 @@ DEPENDENCIES
   jazz_fingers
   jbuilder (~> 2.0)
   jquery-rails
+  plymouth (= 0.3.3)
+  pry-rescue (= 1.4.1)
   pundit (= 0.3.0)
   quiet_assets (= 1.1.0)
   rails (= 4.1.7)

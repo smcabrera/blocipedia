@@ -31,3 +31,6 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0.0', group: :test
 end
 
+
+gem 'pry-rescue', '1.4.1'
+gem 'plymouth', '0.3.3'
