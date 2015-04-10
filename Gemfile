@@ -27,4 +27,7 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0.0', group: :test
 end
 
+gem 'factory_girl', '4.5.0'
+gem 'factory_girl_rails', '4.5.0'
+gem 'pundit', '0.3.0'
 
