@@ -37,3 +37,4 @@ end
 
 gem 'database_cleaner', '1.4.1'
 gem 'faker', '~> 1.4.3'
+gem 'stripe', '1.20.4'
