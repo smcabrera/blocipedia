@@ -1,6 +1,5 @@
 require 'rails_helper'
 require 'spec_helper'
-#require 'prymouth'
 require 'pry'
 
 describe "Standard (free) User" do
