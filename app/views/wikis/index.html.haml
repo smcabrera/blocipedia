@@ -10,7 +10,7 @@
           = link_to wiki.title, wiki_path(wiki)
         %td
           - if current_user && wiki.user.email == current_user.email
-            = "y you"
+            = "you"
           -else
             = "#{wiki.user.email}"
         %td{colspan: 2}

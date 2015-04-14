@@ -4,6 +4,15 @@ User.all.each { |user| user.delete }
 Wiki.all.each { |wiki| wiki.delete }
 
 #Create users
+me = User.new(
+  :name     => "Stephen",
+  :email    => "stephen.m.cabrera@gmail.com",
+  :password => "password",
+  :role     => "admin"
+)
+me.skip_confirmation!
+me.save
+
 free_user = User.new(
   :name  => Faker::Name.name,
   :email    => "free@example.com",
