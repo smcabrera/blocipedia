@@ -10,6 +10,7 @@ feature 'New user signs up' do
     fill_in 'user_email', with: 'noatsign'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
+    click_button "Sign up"
 
     expect(User.all.count).to eq(0)
   end
@@ -81,7 +82,7 @@ feature 'User sign out' do
     fill_in 'user_email', with: 'test@example.com'
     fill_in 'user_password', with: 'password'
     click_button 'Log in'
-    click_link "Sign out"
+    click_link "signout"
 
     expect(page).to have_content('Signed out successfully.')
   end

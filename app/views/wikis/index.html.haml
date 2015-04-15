@@ -14,8 +14,8 @@
           -else
             = "#{wiki.user.email}"
         %td{colspan: 2}
-          = link_to 'edit', edit_wiki_path(wiki)
-          -#- binding.pry
+          - if current_user
+            = link_to 'edit', edit_wiki_path(wiki)
           -if current_user && policy(wiki).destroy?
             = link_to 'delete', wiki, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?' }
           -else
