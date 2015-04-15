@@ -1,7 +1,6 @@
 # As a user, I want to be able to sign up for a new account
 require 'spec_helper'
 require 'rails_helper'
-require 'spec_helper'
 
 feature 'New user signs up' do
   scenario 'with invalid username and password' do

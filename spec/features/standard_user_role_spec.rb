@@ -99,14 +99,14 @@ describe "Standard (free) User" do
   end
 
   context "when not logged in" do
-    before do
-      @free_user = create(:user)
-      @premium_user = create(:user, role: "premium")
-      login_as(@free_user, :scope => :user)
-    end
 
     it 'cannot create wikis' do
-      click_link "#signout"
+      @free_user = create(:user)
+      login_as(@free_user, :scope => :user)
+
+      expect(page).to have_content('Hello')
+
+      click_link "signout"
 
       visit root_path
       expect(page).to_not have_link('Create wiki')
