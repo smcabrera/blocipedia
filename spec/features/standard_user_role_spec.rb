@@ -104,11 +104,9 @@ describe "Standard (free) User" do
       @free_user = create(:user)
       login_as(@free_user, :scope => :user)
 
-      expect(page).to have_content('Hello')
-
-      click_link "signout"
-
       visit root_path
+      click_link "Sign out", visible: false
+
       expect(page).to_not have_link('Create wiki')
     end
   end
