@@ -29,9 +29,10 @@ class WikisController < ApplicationController
   end
 
   def update
-    @wiki = current_user.wikis.build(params[:id])
+    @wiki = Wiki.find(params[:id])
+    @wiki.update_attributes(wiki_params)
 
-    if @wiki.update_attributes(wiki_params)
+    if @wiki.save
       redirect_to @wiki
     else
       flash[:error] = "Error saving wiki. Please try again"
