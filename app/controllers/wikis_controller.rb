@@ -1,8 +1,27 @@
 class WikisController < ApplicationController
   def index
-    # I'll use select instead to get the private wikis
-    @public_wikis = Wiki.all.reject { |wiki| wiki.private? }
-    #TODO: Let's add a scope here using pundit that will figure out the correct wikis to display
+    if current_user == nil or current_user.role == "free"
+      # If guest or free signed-in user then just show the public wikis
+      @wikis = Wiki.all.reject { |wiki| wiki.private? }
+
+    elsif current_user.role == "premium"
+      # Keep all public wikis
+      @wikis = Wiki.all.reject { |wiki| wiki.private? }
+
+      # And then add back all private wikis for which the owner is the current user
+      user_wikis = Wiki.where(:private => true, :user_id => current_user.id)
+      user_wikis.each do |wiki|
+        @wikis << wiki
+      end
+
+    elsif current_user.role ==  "admin"
+      # Admin sees all, knows all
+      @wikis = Wiki.all
+    end
+
+    # TODO: The above has NO business being in the controller.
+    # Would be handled much nicer in a scope. And probably better performance just using SQL queries.
+    # The pundit gem supports adding scopes to their policies
   end
 
   def show

@@ -24,6 +24,13 @@ describe "Premium user" do
       expect(Wiki.first.private).to be(true)
     end
 
+    it "can view private wikis they have created" do
+      create(:wiki, :private  => true, :user_id => @user.id)
+      visit root_path
+
+      expect(page).to have_content("Wiki title")
+    end
+
     it "can downgrade plan to free " do
       visit edit_user_registration_path
       #expect(page).to have_content("Downgrade to Free")
@@ -32,7 +39,7 @@ describe "Premium user" do
       #expect(@user.role).to eq("free")
     end
 
-    it "will see all the private posts that will become public upon downgrading" do
+    xit "will see all the private posts that will become public upon downgrading" do
 
     end
 

@@ -1,10 +1,10 @@
-- if @public_wikis
+- if @wikis
   %table.table
     %header
       %td Wiki
       %td Author
       %td
-    - @public_wikis.each do |wiki|
+    - @wikis.each do |wiki|
       %tr
         %td
           = link_to markdown( wiki.title ), wiki_path(wiki)
