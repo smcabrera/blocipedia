@@ -53,7 +53,9 @@
     <% if current_user.role == "free" %>
       <%= link_to "Upgrade to Premium", new_charge_path, class: "btn btn-success" %>
     <% else %>
-      <%= link_to "Downgrade to Free", "#", class: "btn btn-success" %>
+      <%= form_for(current_user) do |f| %>
+        <%= f.submit "Downgrade to Free", class: "btn btn-success" %>
+      <% end %>
     <% end %>
 
     <h3>Cancel my account</h3>

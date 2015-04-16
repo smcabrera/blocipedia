@@ -10,7 +10,7 @@
 
   %br
 
-  - if
+  - if current_user.role == "admin" || current_user.role == "premium"
     .form-group
       = f.check_box :private, checked_value: "true", unchecked_value: "false"
       = f.label :private

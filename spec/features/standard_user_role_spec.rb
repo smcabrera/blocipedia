@@ -7,19 +7,12 @@ describe "Standard (free) User" do
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  context "when not logged in" do
-    it 'cannot create wikis' do
-      visit root_path
-      expect(page).to_not have_link('Create wiki')
-    end
-  end
-
   context "when logged in" do
 
     before do
-      @user = create(:user)
-      @other_user = create(:user)
-      login_as(@user, :scope => :user)
+      @free_user = create(:user)
+      @premium_user = create(:user, role: "premium")
+      login_as(@free_user, :scope => :user)
     end
 
     it 'can create a public wiki' do
@@ -34,7 +27,7 @@ describe "Standard (free) User" do
     end
 
     it 'can view a public wiki' do
-      Wiki.create(title: 'Public Wiki', body: "Wiki body", user_id: @user.id)
+      Wiki.create(title: 'Public Wiki', body: "Wiki body", user_id: @free_user.id)
 
       visit root_path
       click_link 'Public Wiki'
@@ -43,7 +36,7 @@ describe "Standard (free) User" do
     end
 
     it 'can edit a public wiki they have published' do
-      create(:public_wiki, :user_id => @user.id)
+      create(:public_wiki, :user_id => @free_user.id)
 
       visit root_path
       click_link 'edit'
@@ -55,7 +48,7 @@ describe "Standard (free) User" do
     end
 
     it 'can delete their own public wiki' do
-      create(:public_wiki, :user_id => @user.id)
+      create(:public_wiki, :user_id => @free_user.id)
 
       visit root_path
       click_link 'delete'
@@ -64,7 +57,7 @@ describe "Standard (free) User" do
     end
 
     it "can edit public wikis created by another user" do
-      create(:public_wiki, user_id: @other_user.id)
+      create(:public_wiki, user_id: @premium_user.id)
 
       visit root_path
       click_link "edit"
@@ -82,21 +75,21 @@ describe "Standard (free) User" do
       # I'll need to clean the test database first for this to work
 
       # Clean the test database
-      public_wiki = create(:public_wiki, user_id: @other_user.id)
+      public_wiki = create(:public_wiki, user_id: @premium_user.id)
       visit root_path
 
       expect(page).to_not have_content("delete")
     end
 
     it 'cannot view private wikis' do
-      private_wiki = create(:private_wiki)
+      private_wiki = create(:private_wiki, user_id: @premium_user.id)
       visit root_path
 
       expect(page).to_not have_content("Private")
     end
 
     it 'cannot create private wikis' do
-      private_wiki = create(:private_wiki)
+      private_wiki = create(:private_wiki, user_id: @premium_user.id)
       visit root_path
       click_link "Create wiki"
 
@@ -104,4 +97,18 @@ describe "Standard (free) User" do
     end
 
   end
+
+  context "when not logged in" do
+
+    it 'cannot create wikis' do
+      @free_user = create(:user)
+      login_as(@free_user, :scope => :user)
+
+      visit root_path
+      click_link "Sign out", visible: false
+
+      expect(page).to_not have_link('Create wiki')
+    end
+  end
+
 end

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
 
   resources :charges, only: [:new, :create]
+
 end
