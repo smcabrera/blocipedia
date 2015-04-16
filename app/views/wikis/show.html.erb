@@ -4,5 +4,5 @@
 </h3>
 
 <p>
-  <%= @wiki.body %>
+  <%= markdown_to_html( @wiki.body ) %>
 </p>

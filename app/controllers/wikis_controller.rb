@@ -14,7 +14,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = current_user.wikis.build(wiki_params)
 
     if @wiki.save
       redirect_to wikis_path, notice: "wiki was saved successfully."
@@ -29,7 +29,7 @@ class WikisController < ApplicationController
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = current_user.wikis.build(params[:id])
 
     if @wiki.update_attributes(wiki_params)
       redirect_to @wiki
