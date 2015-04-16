@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   def index
     # I'll use select instead to get the private wikis
     @public_wikis = Wiki.all.reject { |wiki| wiki.private? }
-    #private_@wikis = Wiki.all.select { |wiki| wiki.private? }
+    #TODO: Let's add a scope here using pundit that will figure out the correct wikis to display
   end
 
   def show
