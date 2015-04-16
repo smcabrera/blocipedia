@@ -1,8 +1,9 @@
 
 <h3>
-  <%= @wiki.title %>
+  <%= markdown( @wiki.title ) %>
 </h3>
 
 <p>
-  <%= markdown_to_html( @wiki.body ) %>
+  <%= markdown( @wiki.body ) %>
 </p>
+

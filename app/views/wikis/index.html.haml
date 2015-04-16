@@ -7,7 +7,7 @@
     - @public_wikis.each do |wiki|
       %tr
         %td
-          = link_to wiki.title, wiki_path(wiki)
+          = link_to markdown( wiki.title ), wiki_path(wiki)
         %td
           - if current_user && wiki.user.email == current_user.email
             = "you"
