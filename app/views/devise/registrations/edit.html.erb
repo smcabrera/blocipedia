@@ -46,24 +46,59 @@
         <%= f.submit "Update Personal Info", class: 'btn btn-primary' %>
       </div>
     <% end %>
+  </div>
+</div>
 
-    <h3>Change my plan</h3>
-    Implement Stripe payment and selecting a new plan here
+<h3>Change my plan</h3>
 
-    <% if current_user.role == "free" %>
-      <%= link_to "Upgrade to Premium", new_charge_path, class: "btn btn-success" %>
-    <% else %>
-      <%= form_for(current_user) do |f| %>
-        <%= f.submit "Downgrade to Free", class: "btn btn-success" %>
-      <% end %>
-    <% end %>
+<div class="row">
 
-    <h3>Cancel my account</h3>
+  <div class="container col-md-4">
+    <div class="well panel panel-default">
+      <h4>Free</h4>
+      <p>Free plan. Can only create, view and edit publicly available wikis.</p
+      <p>
+        <% if current_user.subscription %>
+          <%= link_to "Downgrade to Free", subscription_path(current_user), method: :delete, class: "btn btn-primary #{disable_class(current_user, "free")}" %>
+        <% else %>
+          <%= link_to "Downgrade to Free", "#", class: "btn btn-primary disabled" %>
+        <% end %>
+        </p>
+      </div>
+    </div>
 
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'%></p>
+    <div class="container col-md-4">
+      <div class="well panel panel-default">
+        <h4>Premium</h4>
+        <p>
+          Premium plan. Gives you the ability to create and collaborate on private wikis.
+        </p>
+        <p>
+          <% unless current_user.subscription %>
+            <%= link_to "Upgrade to Premium", subscriptions_path, method: :post, class: "btn btn-primary #{disable_class(current_user, "premium")}" %>
+          <% else %>
+            <%= link_to "Upgrade to Premium", "#", class: "btn btn-primary disabled" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
 
-    <%= link_to "Back", :back %>
-    <br /><br />
+  </div>
+</div>
+
+
+<div class="container">
+
+<h3>Cancel my account</h3>
+
+  <div class="row">
+    <div class="container col-md-4">
+
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'%></p>
+
+      <%= link_to "Back", :back %>
+      <br /><br />
+    </div>
   </div>
 </div>
 
