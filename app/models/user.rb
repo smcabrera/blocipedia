@@ -6,10 +6,15 @@ class User < ActiveRecord::Base
   # I'm not sure if I want wikis to destroy but otherwise I have to
   # add a whole lot of logic relating to wikis without users
   has_many :wikis, dependent: :destroy
+  has_one :subscription, dependent: :destroy
 
   after_initialize :init
 
   def init
     self.role ||= "free"
+  end
+
+  def subscribed?
+    self.subscription != nil
   end
 end

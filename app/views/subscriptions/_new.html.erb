@@ -8,20 +8,24 @@
   @stripe_btn_data = {
     :key         => "#{ Rails.configuration.stripe[:publishable_key] }",
     :description => "Blocipedia membership - #{current_user.email}",
-    :amount      => 1000
+    :amount      => 1000,
+    :name => "Blocipedia",
+# It might be cool to add an image as well--that will require going over the section on amazon s3 for uploading that image. This is fine for now.
+    :label  => "Upgrade to Premium"
   }
 %>
 
-<%= form_tag charges_path do %>
-  <h4>Click the button!</h4>
+<%= form_tag subscriptions_path do %>
 
   <script
     class='stripe-button'
     src="https://checkout.stripe.com/checkout.js"
     data-key="<%= @stripe_btn_data[:key] %>"
     data-amount=<%= @stripe_btn_data[:amount] %>
+    data-label=<%= @stripe_btn_data[:label] %>
     data-description="<%= @stripe_btn_data[:description] %>" >
 
   </script>
+            <%#<%= link_to "Upgrade to Premium", subscriptions_path, method: :post, class: "btn btn-primary #{disable_class(current_user, "premium")}" %>%>
 <% end %>
 

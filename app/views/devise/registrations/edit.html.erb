@@ -75,7 +75,7 @@
         </p>
         <p>
           <% unless current_user.subscription %>
-            <%= link_to "Upgrade to Premium", subscriptions_path, method: :post, class: "btn btn-primary #{disable_class(current_user, "premium")}" %>
+            <%= render :partial => 'subscriptions/new' %>
           <% else %>
             <%= link_to "Upgrade to Premium", "#", class: "btn btn-primary disabled" %>
           <% end %>

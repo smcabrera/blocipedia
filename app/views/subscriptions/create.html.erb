@@ -1,0 +1,8 @@
+<h3>Thanks!</h3>
+Your card was processed successfully.
+
+<%= "Your role is now #{current_user.role}" %>
+<% if current_user.subscription %>
+  <%= "Your subscription date is now #{current_user.subscription.created_at}" %>
+<% end %>
+
