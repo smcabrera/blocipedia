@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create]
   resources :subscriptions, only: [:new, :create, :destroy]
+  resources :collaborations, only: [:create]
 
 end

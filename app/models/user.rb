@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     self.subscription != nil
   end
 
-  def collaborator?(user)
-
+  def collaborates_on?(wiki)
+    self.collaborations.where(:wiki_id => wiki.id).empty? ? false : true
   end
 end
