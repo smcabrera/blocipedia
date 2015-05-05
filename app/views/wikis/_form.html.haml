@@ -19,21 +19,3 @@
       .form-group
         = f.submit "Save", class: 'btn btn-success'
 
-  .col-md-4
-    %h4 Collaborators:
-    %ul
-      - @wiki.collaborators.each do |c|
-        %li
-          - if c == current_user
-            = "You"
-          - else
-            = c.name
-
-  = form_for Collaboration.new(:wiki_id => @wiki.id) do |f|
-    .form-group
-      = f.label :add_collaborator, class: 'sr-only'
-      = f.check_box :wiki_id, checked_value: "1", unchecked_value: "0"
-      -#= f.collection_select(:user_id, User.all, :id, :name, class: 'form-control')
-    .form-group
-      = f.submit "Add Collaborator", class: 'btn btn-default btn-sm'
-

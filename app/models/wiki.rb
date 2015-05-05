@@ -5,6 +5,8 @@ class Wiki < ActiveRecord::Base
 
   after_save :set_owner_as_collaborator
 
+  # What is this method doing here?
+  # That's what we have controllers for silly!
   def add_collaborator(user)
     Collaboration.create(:user_id => user.id, :wiki_id => self.id)
   end

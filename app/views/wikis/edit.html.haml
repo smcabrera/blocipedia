@@ -1,0 +1,9 @@
+%h1 Edit wiki
+
+.row
+  .col-md-8
+    = render partial: 'form', locals: { wiki: @wiki }
+  .col-md-4
+    = render partial: 'collaborations/index', locals: { wiki: @wiki }
+    %br
+    = render partial: 'collaborations/create', locals: { wiki: @wiki }

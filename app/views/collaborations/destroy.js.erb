@@ -1,0 +1,6 @@
+<% if @collaboration.destroyed? %>
+  $('#user-' + <%= @collaboration.user.id %>).hide();
+$('.main-content').prepend("<div class='alert alert-success'><%= flash[:notice] %></div>");
+<% else %>
+  $('#user-' + <%= @collaboration.user.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>");
+<% end %>

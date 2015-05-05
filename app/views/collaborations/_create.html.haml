@@ -1,0 +1,7 @@
+= form_for [ @wiki, Collaboration.new(:wiki_id => @wiki.id) ]  do |f|
+  .form-group
+    = f.label :add_collaborator, class: 'sr-only'
+    = f.collection_select(:user_id, User.all, :id, :name, class: 'form-control')
+  .form-group
+    = f.submit "Add Collaborator", class: 'btn btn-default btn-sm'
+

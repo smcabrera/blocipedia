@@ -51,9 +51,6 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.update_attributes(wiki_params)
 
-    require 'pry'
-    binding.pry
-
     if @wiki.save
       redirect_to @wiki
     else
