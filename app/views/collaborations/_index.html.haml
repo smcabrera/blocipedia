@@ -1,0 +1,10 @@
+%h4 Collaborators:
+%ul
+  -#- @wiki.collaborators.each do |c|
+  - @wiki.collaborations.each do |c|
+    %li{:id => "user-#{c.user.id}"}
+      - if c.user == current_user
+        = "You"
+      - else
+        = c.user.name
+      = link_to "X", wiki_collaboration_path(@wiki, c), method: :delete, remote: true
