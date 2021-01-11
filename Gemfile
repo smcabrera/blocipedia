@@ -36,4 +36,4 @@ group :development do
 end
 
 
-gem 'redcarpet', '3.2.3'
+gem 'redcarpet', '3.5.1'
